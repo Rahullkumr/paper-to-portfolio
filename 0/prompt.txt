@@ -1,0 +1,69 @@
+this is week 3 and this week's theme is slow and steady
+
+---
+
+is local ai compulsory? if so then why are so many categories like this ss
+
+---
+
+we have much time i am in india. yes memorize it entire, github copilot and whichever we can add we will add in the category. but let us build something cool, everyone maybe building these things only
+
+---
+
+3, 1, 5 => this is my top 3.
+
+3 is interesting, explain it once
+
+---
+
+is 3 built by anyone, check
+
+---
+
+new ideas pls
+
+---
+
+not liked, use your web search skills and search something unique. can we try stock market
+
+---
+
+1. i like it but name, don't like it as I already built something with grandfather reference.
+are these categories can be put in for this?
+
+---
+
+Paper to Portfolio => name selected 
+how many categories i already signed?
+
+---
+
+how to check digital ocean is already unlocked?
+
+---
+
+save in your memory so that i can start in new session and share it using one of the categories.
+
+---
+
+we have very less time now. let us create something simple just for submission
+
+---
+
+<task-notification>
+<task-id>bd7m93s5v</task-id>
+<tool-use-id>toolu_011DCGMzdGSi8XDach3BQuoy</tool-use-id>
+<output-file>C:\Users\rahul\AppData\Local\Temp\claude\c--Users-rahul-Desktop-Hacktober-Fest-slow-and-steady\1655668e-39a6-42b4-b787-938ca8b2660d\tasks\bd7m93s5v.output</output-file>
+<status>completed</status>
+<summary>Background command "Test Gemma extracting corporate actions" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>byjgi743g</task-id>
+<tool-use-id>toolu_01Jew4JfWvn9BxyyjgQx1Xo3</tool-use-id>
+<output-file>C:\Users\rahul\AppData\Local\Temp\claude\c--Users-rahul-Desktop-Hacktober-Fest-slow-and-steady\1655668e-39a6-42b4-b787-938ca8b2660d\tasks\byjgi743g.output</output-file>
+<status>completed</status>
+<summary>Background command "Run full trace pipeline on sample" completed (exit code 0)</summary>
+</task-notification>
