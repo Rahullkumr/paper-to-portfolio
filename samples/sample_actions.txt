@@ -1,0 +1,12 @@
+FICTIONAL SAMPLE - corporate announcements for a made-up company, formatted like an exchange filing list.
+
+Sahyadri Spinning Mills Ltd - Corporate Announcements
+
+12-08-1994  Bonus Issue: The Board has recommended a bonus issue of equity shares in the ratio of 1:1, i.e. one new equity share for every one existing equity share held. Record date 12-08-1994.
+30-09-1996  Dividend: Final dividend of Rs. 1.50 per share declared at the AGM.
+20-02-2001  Bonus Issue: Bonus in the ratio 1:2, i.e. one bonus share for every two equity shares held. Record date 20-02-2001.
+15-09-2006  Sub-division: Sub-division of equity shares from face value Rs. 10 each to face value Rs. 2 each. Record date 15-09-2006.
+22-11-2008  Dividend: Interim dividend of Rs. 0.80 per share.
+01-04-2011  Scheme of Amalgamation: Sahyadri Spinning Mills Ltd amalgamated into Deccan Textiles Ltd. Shareholders shall receive 3 equity shares of Rs. 2 each of Deccan Textiles Ltd for every 4 equity shares of Rs. 2 each held in Sahyadri Spinning Mills Ltd. Record date 01-04-2011.
+10-07-2018  Change of Name: Deccan Textiles Ltd has changed its name to Deccan Fabtech Ltd with effect from 10-07-2018.
+05-08-2023  AGM: 54th Annual General Meeting held through video conferencing.

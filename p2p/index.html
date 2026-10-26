@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper to Portfolio</title>
+<style>
+  :root {
+    --paper: #f4ecd8; --card: #fffaf0; --ink: #2b241c; --muted: #6f6355;
+    --line: #d9cba9; --accent: #3d5f58; --accent-ink: #fff; --warn: #9a3b1f; --ok: #2f6b3a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+    font: 16px/1.55 Georgia, "Times New Roman", serif; padding: 32px 16px 64px; }
+  main { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 2.4rem; margin: 0 0 4px; letter-spacing: .5px; }
+  .tag { color: var(--muted); margin: 0 0 28px; font-style: italic; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 22px 24px; margin-bottom: 20px; }
+  h2 { font-size: 1.15rem; margin: 0 0 14px; font-family: system-ui, sans-serif; }
+  h2 span { display: inline-block; width: 26px; height: 26px; border-radius: 50%; background: var(--accent);
+    color: var(--accent-ink); text-align: center; line-height: 26px; font-size: .85rem; margin-right: 8px; }
+  label { display: block; font: 600 .8rem system-ui, sans-serif; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .04em; margin: 10px 0 4px; }
+  input, textarea, select { width: 100%; padding: 9px 11px; border: 1px solid var(--line); border-radius: 6px;
+    background: #fff; font: 15px system-ui, sans-serif; color: var(--ink); }
+  textarea { min-height: 170px; font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0 16px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+  button { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px;
+    padding: 10px 18px; font: 600 15px system-ui, sans-serif; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  button:disabled { opacity: .5; cursor: wait; }
+  .status { font: 14px system-ui, sans-serif; color: var(--muted); }
+  .status.err { color: var(--warn); }
+  img.preview { max-width: 100%; max-height: 260px; border: 1px solid var(--line); border-radius: 6px; margin-top: 12px; }
+  .big { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 18px; }
+  .big div { font: 600 .8rem system-ui, sans-serif; color: var(--muted); text-transform: uppercase; }
+  .big b { display: block; font: 700 1.7rem Georgia, serif; color: var(--ink); text-transform: none; }
+  ol.timeline { list-style: none; padding: 0; margin: 0; border-left: 3px solid var(--accent); }
+  ol.timeline li { position: relative; padding: 0 0 16px 20px; }
+  ol.timeline li::before { content: ""; position: absolute; left: -8px; top: 6px; width: 13px; height: 13px;
+    border-radius: 50%; background: var(--card); border: 3px solid var(--accent); }
+  .when { font: 600 .8rem system-ui, sans-serif; color: var(--muted); }
+  .ev { font-weight: 700; }
+  .quote { font-size: .85rem; color: var(--muted); border-left: 2px solid var(--line); padding-left: 8px; margin-top: 4px; }
+  .rejected { color: var(--warn); font-size: .9rem; }
+  .summary { white-space: pre-wrap; background: #f8f1df; border-radius: 8px; padding: 14px 16px; }
+  ul.steps { padding-left: 20px; } ul.steps li { margin-bottom: 10px; }
+  .fine { font: 13px system-ui, sans-serif; color: var(--muted); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Paper to Portfolio</h1>
+  <p class="tag">Found an old share certificate in a drawer? A local open-weight model reads it, slowly and steadily.</p>
+
+  <section>
+    <h2><span>1</span>Photograph the certificate</h2>
+    <input type="file" id="file" accept="image/*">
+    <div class="row">
+      <button id="readBtn" disabled>Read certificate</button>
+      <button class="ghost" id="sampleBtn">Use fictional sample</button>
+      <span class="status" id="readStatus"></span>
+    </div>
+    <img class="preview" id="preview" hidden alt="certificate preview">
+    <div id="certBox" hidden>
+      <p class="fine">Check what Gemma read and fix anything it got wrong.</p>
+      <div class="grid">
+        <div><label>Company</label><input id="company"></div>
+        <div><label>Holder</label><input id="holder"></div>
+        <div><label>Folio</label><input id="folio"></div>
+        <div><label>Certificate no.</label><input id="certificate_no"></div>
+        <div><label>Shares</label><input id="shares" type="number"></div>
+        <div><label>Face value (Rs)</label><input id="face_value" type="number" step="any"></div>
+        <div><label>Issue date</label><input id="issue_date" type="date"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="step2" hidden>
+    <h2><span>2</span>Paste the company's corporate announcements</h2>
+    <p class="fine">Copy the bonus, split, merger and name-change history from the exchange website or annual reports. Gemma only uses what you paste, and every event it finds must quote the text word for word or it is thrown out.</p>
+    <textarea id="actions"></textarea>
+    <div class="grid">
+      <div><label>Today's share price (Rs, optional)</label><input id="price" type="number" step="any"></div>
+      <div><label>Explain in</label><select id="language"><option>English</option><option>Hindi</option><option>Marathi</option><option>Bengali</option><option>Tamil</option></select></div>
+      <div><label>&nbsp;</label><label style="text-transform:none;font-weight:400"><input type="checkbox" id="deceased" style="width:auto"> The holder has passed away</label></div>
+    </div>
+    <div class="row">
+      <button id="traceBtn">Trace to today</button>
+      <span class="status" id="traceStatus"></span>
+    </div>
+  </section>
+
+  <section id="result" hidden>
+    <h2><span>3</span>What it is today</h2>
+    <div class="big">
+      <div>Company now<b id="rCompany"></b></div>
+      <div>Shares now<b id="rShares"></b></div>
+      <div>Growth<b id="rGrowth"></b></div>
+      <div id="rValueBox">Value today<b id="rValue"></b></div>
+    </div>
+    <ol class="timeline" id="timeline"></ol>
+    <div id="rejectedBox" hidden><p class="rejected"><b>Thrown out</b> (failed a check):</p><ul class="rejected" id="rejected"></ul></div>
+    <h2 style="margin-top:22px">In plain words</h2>
+    <div class="summary" id="summary"></div>
+    <h2 style="margin-top:22px">What to do next</h2>
+    <ul class="steps" id="steps"></ul>
+    <p class="fine">General guidance, not legal or financial advice. Confirm with the company's RTA or the IEPF Authority before filing.</p>
+  </section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const FIELDS = ["company", "holder", "folio", "certificate_no", "shares", "face_value", "issue_date"];
+let imageB64 = null;
+const inr = (n) => n.toLocaleString("en-IN", { maximumFractionDigits: 2 });
+
+async function post(path, body) {
+  const res = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+function slowTicker(el, label) {
+  const start = Date.now();
+  el.className = "status";
+  const tick = () => { el.textContent = `${label}… ${Math.round((Date.now() - start) / 1000)}s (no GPU, no hurry)`; };
+  tick();
+  return setInterval(tick, 1000);
+}
+
+function setImage(blob) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    imageB64 = reader.result.split(",")[1];
+    $("preview").src = reader.result; $("preview").hidden = false; $("readBtn").disabled = false;
+  };
+  reader.readAsDataURL(blob);
+}
+
+$("file").onchange = (e) => e.target.files[0] && setImage(e.target.files[0]);
+
+$("sampleBtn").onclick = async () => {
+  setImage(await (await fetch("/sample/certificate.png")).blob());
+  $("actions").value = await (await fetch("/sample/actions.txt")).text();
+  $("price").value = 412.5;
+};
+
+$("readBtn").onclick = async () => {
+  $("readBtn").disabled = true;
+  const t = slowTicker($("readStatus"), "Gemma is reading the certificate");
+  try {
+    const cert = await post("/api/read", { image_b64: imageB64 });
+    FIELDS.forEach((f) => ($(f).value = cert[f] ?? ""));
+    $("certBox").hidden = false; $("step2").hidden = false;
+    $("readStatus").textContent = "Done. Check the fields below.";
+  } catch (e) { $("readStatus").textContent = e.message; $("readStatus").className = "status err"; }
+  clearInterval(t); $("readBtn").disabled = false;
+};
+
+$("traceBtn").onclick = async () => {
+  $("traceBtn").disabled = true;
+  const t = slowTicker($("traceStatus"), "Tracing every bonus, split and merger");
+  const certificate = Object.fromEntries(FIELDS.map((f) => [f, $(f).value]));
+  certificate.shares = parseInt(certificate.shares, 10);
+  certificate.face_value = parseFloat(certificate.face_value);
+  try {
+    const r = await post("/api/trace", {
+      certificate, actions_text: $("actions").value, price: $("price").value,
+      language: $("language").value, holder_deceased: $("deceased").checked,
+    });
+    render(r);
+    $("traceStatus").textContent = "Done.";
+  } catch (e) { $("traceStatus").textContent = e.message; $("traceStatus").className = "status err"; }
+  clearInterval(t); $("traceBtn").disabled = false;
+};
+
+function render(r) {
+  $("rCompany").textContent = r.company_today;
+  $("rShares").textContent = inr(r.shares_today);
+  $("rGrowth").textContent = r.growth;
+  $("rValueBox").hidden = r.value_today == null;
+  if (r.value_today != null) $("rValue").textContent = "Rs " + inr(r.value_today);
+  $("timeline").innerHTML = "";
+  r.timeline.forEach((s) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<div class="when"></div><div class="ev"></div><div></div>`;
+    li.children[0].textContent = s.date;
+    li.children[1].textContent = s.event;
+    li.children[2].textContent = `${inr(s.shares)} shares of ${s.company} (face value Rs ${s.face_value})` +
+      (s.fraction_paid_in_cash ? `, fraction ${s.fraction_paid_in_cash.toFixed(2)} paid in cash` : "");
+    if (s.evidence) { const q = document.createElement("div"); q.className = "quote"; q.textContent = "“" + s.evidence + "”"; li.appendChild(q); }
+    $("timeline").appendChild(li);
+  });
+  $("rejected").innerHTML = "";
+  r.rejected.forEach((a) => { const li = document.createElement("li"); li.textContent = `${a.date} ${a.type} (${a.reason}): “${a.evidence}”`; $("rejected").appendChild(li); });
+  $("rejectedBox").hidden = r.rejected.length === 0;
+  $("summary").textContent = r.summary;
+  $("steps").innerHTML = "";
+  r.checklist.forEach((s) => { const li = document.createElement("li"); li.innerHTML = "<b></b><br><span></span>"; li.children[0].textContent = s.title; li.children[2].textContent = s.detail; $("steps").appendChild(li); });
+  $("result").hidden = false;
+  $("result").scrollIntoView({ behavior: "smooth" });
+}
+</script>
+</body>
+</html>
